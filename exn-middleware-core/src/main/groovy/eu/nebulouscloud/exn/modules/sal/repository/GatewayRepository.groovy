@@ -1,5 +1,6 @@
 package eu.nebulouscloud.exn.modules.sal.repository
 
+import groovy.util.logging.Slf4j
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Repository
@@ -8,6 +9,7 @@ import org.springframework.util.MultiValueMap
 import org.springframework.web.client.HttpClientErrorException
 
 @Repository
+@Slf4j
 class GatewayRepository extends AbstractSalRepository{
 
     GatewayRepository() {
@@ -23,7 +25,9 @@ class GatewayRepository extends AbstractSalRepository{
 
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.MULTIPART_FORM_DATA)
-        String sessionId  = post('connect', credentials, headers)
+        log.trace('Logging in with username: {} and password {}',username,password)
+        String sessionId = post('connect', credentials, headers)
+        log.trace('Logged in with sessionId {}',sessionId)
 
         return sessionId
 

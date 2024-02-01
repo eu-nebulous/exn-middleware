@@ -31,7 +31,7 @@ class CloudProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Registering cloud {}',metaData.user, o)
+        logger.info('{} - Registering cloud {}',metaData?.user, o)
 
 //      User Credentials for connecting to ProActive Server.
 //      SAL is a REST interface to PWS. Get it from UI or store in middleware db?
@@ -61,7 +61,7 @@ class CloudProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Getting clouds {}',metaData.user, o)
+        logger.info('{} - Getting clouds {}',metaData?.user, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -88,7 +88,7 @@ class CloudProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Deleting clouds {}',metaData.user, o)
+        logger.info('{} - Deleting clouds {}',metaData?.user, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?

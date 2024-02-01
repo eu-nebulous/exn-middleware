@@ -30,7 +30,7 @@ class NodeProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Registering node {}',metaData.user, o)
+        logger.info('{} - Registering node {}',metaData?.user, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store in middleware db?
@@ -66,7 +66,7 @@ class NodeProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Getting node for Job {}',metaData.user, metaData.jobId)
+        logger.info('{} - Getting node for Job {}',metaData?.user, metaData.jobId)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -103,7 +103,7 @@ class NodeProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Deleting nodes for Job {}',metaData.user, metaData.jobId)
+        logger.info('{} - Deleting nodes for Job {}',metaData?.user, metaData.jobId)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -140,7 +140,7 @@ class NodeProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Assigning node {} to job with payload: {}',metaData.user, metaData.jobId, o)
+        logger.info('{} - Assigning node {} to job with payload: {}',metaData?.user, metaData.jobId, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store in middleware db?

@@ -7,6 +7,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.HttpServerErrorException
 
 /**
@@ -25,9 +26,11 @@ abstract class AbstractProcessor implements Processor {
     @Override
     Map process(String destination, ClientMessage message) {
 
-        //Maybe move it to message property(?) and don't blend with application's payload
         Map payload = message.body() as Map
         Map metaData = payload.metaData as Map
+        if(!metaData){
+            metaData =[:]
+        }
         String o = payload.body
 
         Map ret = [:]
@@ -53,19 +56,26 @@ abstract class AbstractProcessor implements Processor {
                     ret = post(metaData,o)
             }
 
-        } catch (HttpServerErrorException e) {
-            logger.error("[{} -> {}] Exception during gateway request for {}", metaData.user, method, o, e)
-            ret.status = HttpStatus.BAD_GATEWAY.value()
-            ret.body = ["key": "gateway-exception-error", "message": 'Gateway exception while handling request with reason' + StringUtils.substring(e.getMessage(),0,50)]
+        } catch (HttpClientErrorException e) {
+            logger.error("[{} -> {}] Client Exception during gateway request for {}", metaData?.user, method, o, e)
+            logger.error('RAW HTTP CLIENT ERROR:\n {}', e.getMessage())
+            ret.status = e.getStatusCode().value()
+            ret.body = ["key": "gateway-client-exception-error", "message": StringUtils.substring(e.getMessage(), 0, 50)]
+        }
+        catch (HttpServerErrorException e) {
+            logger.error("[{} -> {}] Server Exception during gateway request for {}", metaData?.user, method, o, e)
+            logger.error('RAW HTTP SERVER ERROR:\n {}',e.getMessage())
+            ret.status = e.getStatusCode().value()
+            ret.body = ["key": "gateway-server-exception-error", "message": StringUtils.substring(e.getMessage(),0,50)]
         } catch (Exception e) {
-            logger.error("[{} -> {}] Exception for {}", metaData.user, method, o, e)
+            logger.error("[{} -> {}] Exception for {}", metaData?.user, method, o, e)
+            logger.error('RAW EXCEPTION ERROR:\n {}',e.getMessage())
             ret.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
-//            ret.body = ["key": "generic-exception-error", "message": 'Generic exception while handling request for user ' + metaData.user + ' and reason:\n' + StringUtils.left(e.getMessage(),100)]
             ret.body = ["key": "generic-exception-error", "message": 'Generic exception while handling request for user ' + StringUtils.substring(e.getMessage(),0,50)]
         }
 
         metaData.status = ret.status
-//        metaData.protocol = 'HTTP'
+        metaData.protocol = 'HTTP'
         ret.remove('status')
         ret.metaData = metaData
         ret.body = mapper.writeValueAsString(ret.body)
@@ -85,7 +95,7 @@ abstract class AbstractProcessor implements Processor {
     Map delete(Map metaData, String body) { return noop(metaData, body) }
 
     Map noop(Map metaData, String body) {
-        return ["status": HttpStatus.ACCEPTED.value(), "body": metaData.user + " { " + body + "}"]
+        return ["status": HttpStatus.ACCEPTED.value(), "body": metaData?.user + " { " + body + "}"]
     }
 
 }

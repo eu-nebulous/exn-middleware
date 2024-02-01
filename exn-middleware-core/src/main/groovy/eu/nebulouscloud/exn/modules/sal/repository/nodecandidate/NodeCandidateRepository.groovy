@@ -15,5 +15,8 @@ class NodeCandidateRepository extends AbstractSalRepository{
         post('filter',body,headers,responseType)
     }
 
+    List rankCandidates(String body, HttpHeaders headers, Class responseType){
+        post('orderfiltered',body,headers,responseType)
+    }
 
 }

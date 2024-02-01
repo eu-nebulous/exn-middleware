@@ -30,7 +30,7 @@ class NodeCandidateProcessor extends AbstractProcessor{
     @Override
     Map get(Map metaData, String o) {
 
-        logger.info('{} - Getting node candidates {}',metaData.user, o)
+        logger.info('{} - Getting node candidates {}',metaData?.user, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -50,5 +50,25 @@ class NodeCandidateProcessor extends AbstractProcessor{
 
     }
 
+    @Override
+    Map post(Map metaData, String o) {
+
+        logger.info('{} - Ranking node candidates {}',metaData?.user, o)
+
+        String sessionId = gatewayRepository.login(salConfiguration.username,salConfiguration.password)
+
+        HttpHeaders headers = new HttpHeaders()
+        headers.add('sessionid',sessionId)
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        //Check jobId mentioned above
+        List response = nodeCandidateRepository.rankCandidates(o,headers,Object.class)
+
+        return [
+                "status": HttpStatus.OK.value(),
+                "body": response
+        ]
+
+    }
 
 }

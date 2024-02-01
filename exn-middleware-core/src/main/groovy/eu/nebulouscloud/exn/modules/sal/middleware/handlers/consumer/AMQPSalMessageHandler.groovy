@@ -50,6 +50,7 @@ public class AMQPSalMessageHandler extends Handler {
 
             Map response = p.process(destination, message)
 
+            log.info('REPLYING {}',response)
             Map amqpProperties =
                     ['correlation-id': message.correlationId()?.toString(),
                      'reply-to'      : message.replyTo()]

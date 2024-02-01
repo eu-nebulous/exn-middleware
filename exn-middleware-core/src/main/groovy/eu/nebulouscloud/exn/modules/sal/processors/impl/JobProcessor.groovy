@@ -35,7 +35,7 @@ class JobProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Creating job {}',metaData.user, o)
+        logger.info('{} - Creating job {}',metaData?.user, o)
 
 //      User Credentials for connecting to ProActive Server.
 //      SAL is a REST interface to PWS. Get it from UI or store in middleware db?
@@ -48,11 +48,11 @@ class JobProcessor extends AbstractProcessor{
         headers.add('sessionid',sessionId)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        def response = jobRepository.save(o,headers,Object.class)
+        Boolean response = jobRepository.save(o,headers,Boolean.class)
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": response
+                "body": ["success":response]
         ]
 
     }
@@ -65,7 +65,7 @@ class JobProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Getting clouds {}',metaData.user, o)
+        logger.info('{} - Getting clouds {}',metaData?.user, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -101,7 +101,7 @@ class JobProcessor extends AbstractProcessor{
         String jobId = metaData.jobId
         String action = metaData.action
 
-        logger.info('{} - [{}] job {} and payload {}',metaData.user, action, jobId, o)
+        logger.info('{} - [{}] job {} and payload {}',metaData?.user, action, jobId, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -140,7 +140,7 @@ class JobProcessor extends AbstractProcessor{
                 "body": {}
         ]
 
-        logger.info('{} - Submitting job {} with body {}',metaData.user, metaData.jobId, o)
+        logger.info('{} - Submitting job {} with body {}',metaData?.user, metaData.jobId, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?

@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "quay.io/nebulous/exn-middleware-java-spring-boot-demo"
-  pullPolicy: IfNotPresent
+  repository: "quay.io/nebulous/exn-middleware-exn-middleware-core"
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 

@@ -1,0 +1,28 @@
+logging:
+  level:
+    eu.nebulouscloud.exn.modules: TRACE
+
+spring:
+  profiles: default
+  main:
+    web-application-type: none
+  jms:
+    pub-sub-domain: true
+
+application:
+  exn:
+    config:
+      url: 'nebulous-nebulous-activemq'
+      port: 5672
+      username: 'admin'
+      password: 'admin'
+  sal:
+    protocol: 'http'
+#    host: 'fa84-194-219-170-2.ngrok-free.app/'
+    host: 'sal'
+    port: '8080'
+    api: 'sal'
+    username: 'admin'
+    password: 'admin'
+  jms:
+    topic: 'eu.nebulouscloud'

@@ -8,15 +8,15 @@
       - nebulous-exn-middleware-container-images
     description: Build the container images.
     files: &image_files
-      - ^java-spring-boot-demo/
+      - ^exn-middleware-core
     vars: &image_vars
       promote_container_image_job: nebulous-exn-middleware-upload-container-images
       container_images:
-        - context: java-spring-boot-demo
+        - context: exn-middleware-core
           registry: quay.io
-          repository: quay.io/nebulous/exn-middleware-java-spring-boot-demo
+          repository: quay.io/nebulous/exn-middleware-exn-middleware-core
           namespace: nebulous
-          repo_shortname: exn-middleware-java-spring-boot-demo
+          repo_shortname: exn-middleware-exn-middleware-core
           repo_description: ""
 
 - job:
@@ -44,7 +44,7 @@
     description: Run Hadolint on Dockerfile(s).
     vars:
       dockerfiles:
-        - java-spring-boot-demo/Dockerfile
+        - exn-middleware-core/Dockerfile
 
 - job:
     name: nebulous-exn-middleware-helm-lint

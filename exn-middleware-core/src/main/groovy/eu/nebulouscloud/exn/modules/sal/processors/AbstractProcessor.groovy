@@ -1,6 +1,7 @@
 package eu.nebulouscloud.exn.modules.sal.processors
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import eu.nebulouscloud.exn.modules.sal.service.ActionResolveService
 import org.apache.commons.lang3.StringUtils
 import org.apache.qpid.protonj2.client.impl.ClientMessage
 import org.slf4j.Logger
@@ -23,6 +24,9 @@ abstract class AbstractProcessor implements Processor {
     @Autowired
     ObjectMapper mapper
 
+    @Autowired
+    ActionResolveService resolveService
+
     @Override
     Map process(String destination, ClientMessage message) {
 
@@ -37,6 +41,8 @@ abstract class AbstractProcessor implements Processor {
 
         logger.debug("[{}] Processing {}", metaData, o)
         String method = destination.substring(destination.lastIndexOf(".") + 1)
+
+        method = resolveService.resolve(method,metaData)
         try {
 
             switch (method) {
@@ -52,8 +58,12 @@ abstract class AbstractProcessor implements Processor {
                 case 'delete':
                     ret = delete(metaData, o)
                     break;
+                case 'create':
+                    ret = create(metaData,o)
+                    break
                 default:
-                    ret = post(metaData,o)
+                    ret.status = HttpStatus.NOT_ACCEPTABLE
+                    ret.body = ["key": "gateway-server-exception-error", "message": 'Action '+method+' not supported']
             }
 
         } catch (HttpClientErrorException e) {
@@ -84,7 +94,7 @@ abstract class AbstractProcessor implements Processor {
 
     }
 
-    Map post(Map metaData, String body) { return noop(metaData, body) }
+    Map create(Map metaData, String body) { return noop(metaData, body) }
 
     Map search(Map metaData, String body) { return noop(metaData, body) }
 
@@ -96,6 +106,20 @@ abstract class AbstractProcessor implements Processor {
 
     Map noop(Map metaData, String body) {
         return ["status": HttpStatus.ACCEPTED.value(), "body": metaData?.user + " { " + body + "}"]
+    }
+
+    protected def normalizeResponse(def response){
+
+        if(response instanceof Boolean){
+            return ["success":response]
+        }
+
+        if(response instanceof Number){
+            return ["success":response ==0]
+        }
+
+        return response
+
     }
 
 }

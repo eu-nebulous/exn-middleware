@@ -23,7 +23,7 @@ class NodeProcessor extends AbstractProcessor{
     Map<String,NodeRegistrar> nodeRegistrarMap
 
     @Override
-    Map post(Map metaData, String o){
+    Map create(Map metaData, String o){
 
         def ret =[
                 "status": HttpStatus.OK.value(),
@@ -53,7 +53,7 @@ class NodeProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": ["success": response == 0]
+                "body": normalizeResponse(response)
         ]
 
     }
@@ -127,7 +127,7 @@ class NodeProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": response
+                "body": normalizeResponse(response)
         ]
 
     }

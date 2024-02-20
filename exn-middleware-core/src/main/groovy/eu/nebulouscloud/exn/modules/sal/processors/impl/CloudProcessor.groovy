@@ -24,7 +24,7 @@ class CloudProcessor extends AbstractProcessor{
     SalConfiguration salConfiguration
 
     @Override
-    Map post(Map metaData, String o){
+    Map create(Map metaData, String o){
 
         def ret =[
                 "status": HttpStatus.OK.value(),
@@ -48,7 +48,7 @@ class CloudProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": ["success": response == 0]
+                "body": normalizeResponse(response)
         ]
 
     }
@@ -103,7 +103,7 @@ class CloudProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": ["success":response]
+                "body": normalizeResponse(response)
         ]
 
     }

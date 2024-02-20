@@ -28,7 +28,7 @@ class JobProcessor extends AbstractProcessor{
     Map<String, IJobDeleteStrategy> deleteStrategies
 
     @Override
-    Map post(Map metaData, String o){
+    Map create(Map metaData, String o){
 
         def ret =[
                 "status": HttpStatus.OK.value(),
@@ -52,7 +52,7 @@ class JobProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": ["success":response]
+                "body": normalizeResponse(response)
         ]
 
     }
@@ -60,12 +60,7 @@ class JobProcessor extends AbstractProcessor{
     @Override
     Map get(Map metaData, String o) {
 
-        def ret =[
-                "status": HttpStatus.OK.value(),
-                "body": {}
-        ]
-
-        logger.info('{} - Getting clouds {}',metaData?.user, o)
+        logger.info('{} - Getting jobs {}',metaData?.user, o)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
@@ -85,18 +80,13 @@ class JobProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": response
+                "body": normalizeResponse(response)
         ]
 
     }
 
     @Override
     Map delete(Map metaData, String o) {
-
-        def ret =[
-                "status": HttpStatus.OK.value(),
-                "body": {}
-        ]
 
         String jobId = metaData.jobId
         String action = metaData.action
@@ -155,7 +145,7 @@ class JobProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": response
+                "body": normalizeResponse(response)
         ]
 
     }

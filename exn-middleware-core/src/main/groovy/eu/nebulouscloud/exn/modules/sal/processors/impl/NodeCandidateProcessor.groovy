@@ -40,7 +40,6 @@ class NodeCandidateProcessor extends AbstractProcessor{
         headers.add('sessionid',sessionId)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        //Check jobId mentioned above
         List response = nodeCandidateRepository.findCandidates(o,headers,List.class)
 
         return [
@@ -51,7 +50,7 @@ class NodeCandidateProcessor extends AbstractProcessor{
     }
 
     @Override
-    Map post(Map metaData, String o) {
+    Map update(Map metaData, String o) {
 
         logger.info('{} - Ranking node candidates {}',metaData?.user, o)
 
@@ -61,12 +60,11 @@ class NodeCandidateProcessor extends AbstractProcessor{
         headers.add('sessionid',sessionId)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        //Check jobId mentioned above
-        List response = nodeCandidateRepository.rankCandidates(o,headers,Object.class)
+        def response = nodeCandidateRepository.rankCandidates(o,headers,Object.class)
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": response
+                "body": normalizeResponse(response)
         ]
 
     }

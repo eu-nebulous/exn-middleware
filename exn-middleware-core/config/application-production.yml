@@ -12,8 +12,7 @@ spring:
 application:
   exn:
     config:
-#      url: 'nebulous-activemq'
-      url: 'localhost'
+      url: 'nebulous-activemq'
       port: '5672'
       username: 'admin'
       password: 'admin'

@@ -29,7 +29,8 @@ WORKDIR /app
 COPY --from=builder /app/target/exn-middleware-core-0.0.1-SNAPSHOT.jar ./exn-middleware-core-0.0.1-SNAPSHOT.jar
 
 #Copy application configuration
-COPY config ./
+RUN mkdir config
+COPY config/application-production.yml ./config/application.yml
 
 #Run java app on container start
 CMD ["java", "-jar", "exn-middleware-core-0.0.1-SNAPSHOT.jar"]

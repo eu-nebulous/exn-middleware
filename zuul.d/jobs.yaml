@@ -14,9 +14,9 @@
       container_images:
         - context: exn-middleware-core
           registry: quay.io
-          repository: quay.io/nebulous/exn-middleware-exn-middleware-core
+          repository: quay.io/nebulous/exn-middleware-core
           namespace: nebulous
-          repo_shortname: exn-middleware-exn-middleware-core
+          repo_shortname: exn-middleware-core
           repo_description: ""
 
 - job:

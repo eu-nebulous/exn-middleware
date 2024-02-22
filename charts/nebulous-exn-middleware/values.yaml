@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: "quay.io/nebulous/exn-middleware-exn-middleware-core"
+  repository: "quay.io/nebulous/exn-middleware-core"
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""

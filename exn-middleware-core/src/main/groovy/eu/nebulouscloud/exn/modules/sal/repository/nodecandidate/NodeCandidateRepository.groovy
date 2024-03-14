@@ -11,12 +11,12 @@ class NodeCandidateRepository extends AbstractSalRepository{
         super('nodecandidates')
     }
 
-    List findCandidates(String body, HttpHeaders headers, Class responseType){
-        post('filter',body,headers,responseType)
-    }
-
-    List rankCandidates(String body, HttpHeaders headers, Class responseType){
-        post('orderfiltered',body,headers,responseType)
-    }
+//    List findCandidates(String body, HttpHeaders headers, Class responseType){
+//        post('filter',body,headers,responseType)
+//    }
+//
+//    List rankCandidates(String body, HttpHeaders headers, Class responseType){
+//        post('orderfiltered',body,headers,responseType)
+//    }
 
 }

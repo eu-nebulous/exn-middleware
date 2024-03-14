@@ -40,7 +40,8 @@ class NodeCandidateProcessor extends AbstractProcessor{
         headers.add('sessionid',sessionId)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        List response = nodeCandidateRepository.findCandidates(o,headers,List.class)
+//        List response = nodeCandidateRepository.findCandidates(o,headers,List.class)
+        List response = nodeCandidateRepository.save(o,headers,List.class)
 
         return [
                 "status": HttpStatus.OK.value(),

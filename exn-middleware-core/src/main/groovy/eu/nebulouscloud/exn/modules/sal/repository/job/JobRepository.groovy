@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 class JobRepository extends AbstractSalRepository{
 
     JobRepository() {
-        super('jobs')
+        super('job')
     }
 }

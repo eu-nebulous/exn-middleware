@@ -108,18 +108,4 @@ abstract class AbstractProcessor implements Processor {
         return ["status": HttpStatus.ACCEPTED.value(), "body": metaData?.user + " { " + body + "}"]
     }
 
-    protected def normalizeResponse(def response){
-
-        if(response instanceof Boolean){
-            return ["success":response]
-        }
-
-        if(response instanceof Number){
-            return ["success":response ==0]
-        }
-
-        return response
-
-    }
-
 }

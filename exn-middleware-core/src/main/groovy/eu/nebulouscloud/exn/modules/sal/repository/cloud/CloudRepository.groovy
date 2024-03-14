@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 class CloudRepository extends AbstractSalRepository{
 
     CloudRepository() {
-        super('clouds')
+        super('cloud')
     }
 
 

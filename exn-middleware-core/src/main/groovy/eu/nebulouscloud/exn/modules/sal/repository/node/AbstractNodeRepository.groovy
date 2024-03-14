@@ -11,6 +11,9 @@ abstract class AbstractNodeRepository extends AbstractSalRepository implements N
     }
 
     @Override
+    //There is a jobId path variable in the endpoint that will be optional in the end by Activeeon
+    //This works for both, if one is provided then edge/jobId is used
+    //If it is null then edge is posted
     def register(String jobId, String body, HttpHeaders headers){
         post(jobId, body, headers)
     }

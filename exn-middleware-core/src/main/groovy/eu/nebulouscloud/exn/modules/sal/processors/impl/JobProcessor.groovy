@@ -52,7 +52,7 @@ class JobProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }
@@ -80,7 +80,7 @@ class JobProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }
@@ -145,7 +145,7 @@ class JobProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }

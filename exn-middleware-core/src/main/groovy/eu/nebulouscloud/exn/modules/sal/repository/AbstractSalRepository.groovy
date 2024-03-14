@@ -58,6 +58,9 @@ abstract class AbstractSalRepository{
 
     protected <T> T post(String url, String body, HttpHeaders headers, Class responseType) throws HttpStatusCodeException{
 
+        if(!headers.containsKey('Content-Type')) {
+            headers.add('Content-Type', 'application/json')
+        }
         HttpEntity entity = new HttpEntity(body, headers)
 
         return restTemplate.postForEntity(baseUrl+'/'+resource+(url?'/'+url:''), entity, responseType).getBody() as T

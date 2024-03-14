@@ -64,7 +64,7 @@ class NodeCandidateProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }

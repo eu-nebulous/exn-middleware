@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 class CloudNodeRepository extends AbstractNodeRepository{
 
     CloudNodeRepository() {
-        super('nodes')
+        super('node')
     }
 
     @Override

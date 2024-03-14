@@ -49,11 +49,11 @@ class NodeProcessor extends AbstractProcessor{
         HttpHeaders headers = new HttpHeaders()
         headers.add('sessionid',sessionId)
 
-        def response = nodeRegistrarRepository.register(metaData.jobId as String, o, headers)
+        def response = nodeRegistrarRepository.register(metaData.jobId, o, headers)
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }
@@ -127,7 +127,7 @@ class NodeProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }

@@ -48,7 +48,7 @@ class CloudProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }
@@ -103,7 +103,7 @@ class CloudProcessor extends AbstractProcessor{
 
         return [
                 "status": HttpStatus.OK.value(),
-                "body": normalizeResponse(response)
+                "body": response
         ]
 
     }

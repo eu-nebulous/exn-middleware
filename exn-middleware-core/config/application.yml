@@ -19,7 +19,7 @@ application:
       password: 'admin'
   sal:
     protocol: 'http'
-    host: 'sal'
+    host: 'localhost'
     port: '8080'
     api: 'sal'
     username: 'admin'

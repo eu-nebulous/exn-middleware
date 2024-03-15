@@ -62,7 +62,7 @@ abstract class AbstractProcessor implements Processor {
                     ret = create(metaData,o)
                     break
                 default:
-                    ret.status = HttpStatus.NOT_ACCEPTABLE
+                    ret.status = HttpStatus.NOT_ACCEPTABLE.value()
                     ret.body = ["key": "gateway-server-exception-error", "message": 'Action '+method+' not supported']
             }
 

@@ -53,7 +53,7 @@ class ClusterProcessor extends AbstractProcessor{
         headers.add('sessionid',sessionId)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        def response = clusterRepository.postAction(o,metaData.action as String,headers,Object.class)
+        def response = clusterRepository.postAction(o,metaData,headers,Object.class)
 
         logger.info('Got response {}',response)
         return [
@@ -73,7 +73,7 @@ class ClusterProcessor extends AbstractProcessor{
         HttpHeaders headers = new HttpHeaders()
         headers.add('sessionid',sessionId)
 
-        def response = clusterRepository.scale(o,metaData.action as String,headers, Object.class)
+        def response = clusterRepository.scale(o,metaData,headers, Object.class)
 
         logger.info('Got response {}',response)
         return [

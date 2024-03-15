@@ -51,7 +51,8 @@ class ConfigureEXNConnector {
                         new Publisher("cluster.deploy","cluster.deploy.reply",true,false),
                         new Publisher("cluster.deployApplication","cluster.deployApplication.reply",true,false),
                         new Publisher("cluster.scaleout","cluster.scaleout.reply",true,false),
-                        new Publisher("cluster.scalein","cluster.scalein.reply",true,false)
+                        new Publisher("cluster.scalein","cluster.scalein.reply",true,false),
+                        new Publisher("cluster.label","cluster.label.reply",true,false)
                 ],
                 [
                         new Consumer("cloud","cloud.>", amqpSalMessageHandler,true,false),

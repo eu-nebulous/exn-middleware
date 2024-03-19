@@ -29,6 +29,9 @@ class ClusterRepository extends AbstractSalRepository{
             case 'label':
                 save(metaData.clusterName+'/label',body,headers,responseType)
                 break
+            case 'deployapplication':
+                save(metaData.clusterName+'/app',body,headers,responseType)
+                break
             default:
                 return [
                 "status": HttpStatus.NOT_IMPLEMENTED.value(),

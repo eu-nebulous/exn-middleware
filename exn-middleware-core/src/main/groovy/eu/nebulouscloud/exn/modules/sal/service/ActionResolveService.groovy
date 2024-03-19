@@ -7,7 +7,7 @@ class ActionResolveService {
 
     private final Map<List<String>,String> ACTION_MAPPING =[
             ['assign','submit','in','out','scaleout','scalein']:'update',
-            ['define','deploy','deployApplication','label']:'create',
+            ['define','deploy','deployapplication','label']:'create',
             ['delete','stop','kill'] : 'delete',
             ['rank'] : 'update'
     ]

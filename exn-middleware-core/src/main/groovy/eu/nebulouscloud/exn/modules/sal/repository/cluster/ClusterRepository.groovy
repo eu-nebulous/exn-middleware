@@ -12,11 +12,6 @@ class ClusterRepository extends AbstractSalRepository{
         super('cluster')
     }
 
-    private final Map<String,String> SCALE_ACTION_MAPPING = [
-            'scaleout' : 'out',
-            'scalein' : 'in'
-    ]
-
     def postAction(String body, Map metaData, HttpHeaders headers, Class responseType){
 
         switch (metaData.action){
@@ -35,7 +30,7 @@ class ClusterRepository extends AbstractSalRepository{
             default:
                 return [
                 "status": HttpStatus.NOT_IMPLEMENTED.value(),
-                "body": ["key":"action-not-support","message":"Action type "+ action +" is not supported"]
+                "body": ["key":"action-not-support","message":"Action type "+ metaData.action +" is not supported"]
             ]
         }
     }

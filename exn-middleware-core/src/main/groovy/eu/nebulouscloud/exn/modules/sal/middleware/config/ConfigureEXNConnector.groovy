@@ -49,11 +49,11 @@ class ConfigureEXNConnector {
                         new Publisher("cluster.get","cluster.get.reply",true,false),
                         new Publisher("cluster.define","cluster.define.reply",true,false),
                         new Publisher("cluster.deploy","cluster.deploy.reply",true,false),
-                        new Publisher("cluster.deployApplication","cluster.deployApplication.reply",true,false),
                         new Publisher("cluster.scaleout","cluster.scaleout.reply",true,false),
                         new Publisher("cluster.scalein","cluster.scalein.reply",true,false),
                         new Publisher("cluster.label","cluster.label.reply",true,false),
-                        new Publisher("cluster.deployapplication","cluster.deployapplication.reply",true,false)
+                        new Publisher("cluster.deployapplication","cluster.deployapplication.reply",true,false),
+                        new Publisher("cluster.delete","cluster.delete.reply",true,false)
                 ],
                 [
                         new Consumer("cloud","cloud.>", amqpSalMessageHandler,true,false),

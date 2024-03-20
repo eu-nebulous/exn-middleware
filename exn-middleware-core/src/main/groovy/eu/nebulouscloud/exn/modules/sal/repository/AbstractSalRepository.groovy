@@ -145,5 +145,9 @@ abstract class AbstractSalRepository{
         return delete(url,body,headers,responseType)
     }
 
+    def deleteById(String id, HttpHeaders headers, Class responseType){
+        return delete(id,null,headers,responseType)
+    }
+
 
 }

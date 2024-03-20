@@ -83,4 +83,23 @@ class ClusterProcessor extends AbstractProcessor{
 
     }
 
+    @Override
+    Map delete(Map metaData, String o) {
+
+        logger.info('{} - Deleting cluster {}',metaData.user, metaData.cluster)
+
+        String sessionId = gatewayRepository.login(salConfiguration.username,salConfiguration.password)
+
+        HttpHeaders headers = new HttpHeaders()
+        headers.add('sessionid',sessionId)
+
+        def response = clusterRepository.deleteById(metaData.clusterName as String,headers,Object.class)
+
+        return [
+                "status": HttpStatus.OK.value(),
+                "body": response
+        ]
+
+    }
+
 }

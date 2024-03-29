@@ -123,7 +123,7 @@ class NodeProcessor extends AbstractProcessor{
         HttpHeaders headers = new HttpHeaders()
         headers.add('sessionid',sessionId)
 
-        Object response = nodeRegistrarRepository.deleteById(metaData.jobId as String, headers)
+        Object response = nodeRegistrarRepository.deleteById(metaData.nodeId as String, headers)
 
         return [
                 "status": HttpStatus.OK.value(),

@@ -24,12 +24,8 @@ abstract class AbstractNodeRepository extends AbstractSalRepository implements N
     }
 
     @Override
-    def deleteById(String jobId, HttpHeaders headers){
-        //Payload not clear enough if this work for other type of nodes, if not override this in the derived class
-        if(jobId) {
-           return delete('remove/job/' + jobId, headers)
-        }
+    def deleteById(String edgeId, HttpHeaders headers){
 
-        return delete('remove',headers)
+        return delete(edgeId,headers)
     }
 }

@@ -83,6 +83,10 @@ abstract class AbstractSalRepository{
     //PUT
     protected Object put(String url, String body, HttpHeaders headers) throws HttpStatusCodeException{
 
+        if(!headers.containsKey('Content-Type')) {
+            headers.add('Content-Type', 'application/json')
+        }
+
         RequestEntity<String> entity = new RequestEntity<String>(body, headers, HttpMethod.PUT, new URI(baseUrl+'/'+resource+(url? '/'+url:'')))
 
         return restTemplate.exchange(entity, Object.class).getBody()
@@ -104,7 +108,7 @@ abstract class AbstractSalRepository{
     }
 
     def getById(String id, HttpHeaders headers){
-        return get(id, headers, Map.class)
+        return get(id, headers, Object.class)
     }
 
 

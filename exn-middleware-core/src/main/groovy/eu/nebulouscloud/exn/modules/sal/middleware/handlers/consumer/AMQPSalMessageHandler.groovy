@@ -61,7 +61,7 @@ public class AMQPSalMessageHandler extends Handler {
                 String tempKey = message.replyTo() + message.correlationId()
                 Publisher tempPublisher = new Publisher(tempKey, message.replyTo(), true, true)
 
-                tempPublisher.send(response, null, amqpProperties)
+                tempPublisher.send(response, message.subject(), amqpProperties)
                 context.unregisterPublisher(tempKey)
 
                 return
@@ -74,7 +74,7 @@ public class AMQPSalMessageHandler extends Handler {
 //        Publisher publisher = context.getPublisher(StringUtils.substringAfter(destination,context.base+'.')) as StringPublisher
             Publisher publisher = context.getPublisher(StringUtils.substringAfter(destination, context.base + '.'))
 
-            publisher.send(response, null, amqpProperties)
+            publisher.send(response, message.subject(), amqpProperties)
         } catch (Exception e) {
             log.error('Pre Sent caught exception', e)
         }

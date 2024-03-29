@@ -69,19 +69,22 @@ abstract class AbstractProcessor implements Processor {
         } catch (HttpClientErrorException e) {
             logger.error("[{} -> {}] Client Exception during gateway request for {}", metaData?.user, method, o, e)
             logger.error('RAW HTTP CLIENT ERROR:\n {}', e.getMessage())
+            String sanitizedError = StringUtils.substringBetween(e.getMessage(),'Message</b>','</p><p><b>Exception') ?: 'Unparsable Http Client Error'
             ret.status = e.getStatusCode().value()
-            ret.body = ["key": "gateway-client-exception-error", "message": StringUtils.substring(e.getMessage(), 0, 50)]
+            ret.body = ["key": "gateway-client-exception-error", "message": StringUtils.substring(sanitizedError, 0, 300)]
         }
         catch (HttpServerErrorException e) {
             logger.error("[{} -> {}] Server Exception during gateway request for {}", metaData?.user, method, o, e)
             logger.error('RAW HTTP SERVER ERROR:\n {}',e.getMessage())
+            String sanitizedError = StringUtils.substringBetween(e.getMessage(),'Message</b>','</p><p><b>Exception') ?: 'Unparsable Http Server Error'
             ret.status = e.getStatusCode().value()
-            ret.body = ["key": "gateway-server-exception-error", "message": StringUtils.substring(e.getMessage(),0,50)]
+            ret.body = ["key": "gateway-server-exception-error", "message": StringUtils.substring(sanitizedError,0,300)]
         } catch (Exception e) {
             logger.error("[{} -> {}] Exception for {}", metaData?.user, method, o, e)
             logger.error('RAW EXCEPTION ERROR:\n {}',e.getMessage())
+            String sanitizedError = StringUtils.substringBetween(e.getMessage(),'Message</b>','</p><p><b>Exception') ?: 'Unparsable Generic Internal Error'
             ret.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
-            ret.body = ["key": "generic-exception-error", "message": 'Generic exception while handling request for user ' + StringUtils.substring(e.getMessage(),0,50)]
+            ret.body = ["key": "generic-exception-error", "message": 'Generic exception while handling request for user ' + StringUtils.substring(sanitizedError,0,300)]
         }
 
         metaData.status = ret.status

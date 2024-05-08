@@ -2,7 +2,8 @@
 FROM docker.io/library/openjdk:11 AS builder
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y maven=3.6.3-5
+    apt-get install --no-install-recommends -y \
+    maven=3.6.3-5
 
 #Set the working directory
 WORKDIR /app

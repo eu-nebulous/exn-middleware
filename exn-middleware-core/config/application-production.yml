@@ -12,14 +12,14 @@ spring:
 application:
   exn:
     config:
-      url: 'nebulous-activemq'
-      port: '5672'
+      url: '${ACTIVEMQ_HOST:nebulous-activemq}'
+      port: '${ACTIVEMQ_PORT:5672}'
       username: 'admin'
       password: 'admin'
   sal:
     protocol: 'http'
-    host: 'sal'
-    port: '8080'
+    host: '${SAL_HOST:nebulous-sal}'
+    port: '${SAL_PORT:8080}'
     api: 'sal'
     username: 'admin'
     password: 'admin'

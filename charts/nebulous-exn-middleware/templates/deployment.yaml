@@ -45,9 +45,9 @@ spec:
             - name: 'SAL_PORT'
               value: {{ .Values.SAL_PORT | default "8080" | quote }}
             - name: 'SAL_USER'
-              value: {{ required "SAL_USER required" | .Values.SAL_USER | quote }}
+              value: user
             - name: 'SAL_PASSWORD'
-              value: {{ required "SAL_PASSWORD required" | .Values.SAL_PASSWORD | quote }}
+              value: password
             - name: 'ACTIVEMQ_HOST'
               value: {{ .Values.ACTIVEMQ_HOST | default "nebulous-activemq" | quote }}
             - name: 'ACTIVEMQ_PORT'

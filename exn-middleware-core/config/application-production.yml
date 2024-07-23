@@ -21,7 +21,7 @@ application:
     host: '${SAL_HOST:nebulous-sal}'
     port: '${SAL_PORT:8080}'
     api: 'sal'
-    username: 'admin'
-    password: 'admin'
+    username: '${SAL_USER}'
+    password: '${SAL_PASSWORD}'
   jms:
     topic: 'eu.nebulouscloud'

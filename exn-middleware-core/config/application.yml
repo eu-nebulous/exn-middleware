@@ -17,6 +17,8 @@ application:
       port: '5672'
       username: 'admin'
       password: 'admin'
+      connectTimeout: 20 #min
+      readTimeout: 20 #min
   sal:
     protocol: 'http'
     host: 'localhost'

@@ -98,12 +98,7 @@ class NodeProcessor extends AbstractProcessor{
     @Override
     Map delete(Map metaData, String o) {
 
-        def ret =[
-                "status": HttpStatus.OK.value(),
-                "body": {}
-        ]
-
-        logger.info('{} - Deleting nodes for Job {}',metaData?.user, metaData.jobId)
+        logger.info('{} - Deleting node with id {}',metaData?.user, metaData.nodeId)
 
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?

@@ -62,6 +62,8 @@ class JobProcessor extends AbstractProcessor{
 
         logger.info('{} - Getting jobs {}',metaData?.user, o)
 
+        String action = metaData.action
+
         //User Credentials for connecting to ProActive Server.
         //SAL is a REST interface to PWS. Get it from UI or store behind the scenes ?
         String sessionId = gatewayRepository.login(salConfiguration.username,salConfiguration.password)
@@ -75,7 +77,7 @@ class JobProcessor extends AbstractProcessor{
         if(!jobId){
             response = jobRepository.getAll(headers, List.class)
         }else{
-            response= jobRepository.getById(jobId, headers)
+            response= jobRepository.getById(jobId, action, headers)
         }
 
         return [

@@ -1,4 +1,4 @@
-logging:
+alogging:
   level:
     eu.nebulouscloud.exn: TRACE
 

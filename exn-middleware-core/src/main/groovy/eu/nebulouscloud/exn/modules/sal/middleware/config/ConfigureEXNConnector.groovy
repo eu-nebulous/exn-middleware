@@ -52,7 +52,9 @@ class ConfigureEXNConnector {
                         new Publisher("cluster.scalein","cluster.scalein.reply",true,false),
                         new Publisher("cluster.label","cluster.label.reply",true,false),
                         new Publisher("cluster.deployapplication","cluster.deployapplication.reply",true,false),
-                        new Publisher("cluster.delete","cluster.delete.reply",true,false)
+                        new Publisher("cluster.delete","cluster.delete.reply",true,false),
+                        new Publisher("edge.delete","edge.delete.reply",true,false)
+
                 ],
                 [
                         new Consumer("cloud","cloud.>", amqpSalMessageHandler,true,false),
@@ -60,7 +62,8 @@ class ConfigureEXNConnector {
                         new Consumer("node","node.>", amqpSalMessageHandler,true,false),
                         new Consumer("job","job.>", amqpSalMessageHandler,true,false),
                         new Consumer("scale","scale.>", amqpSalMessageHandler,true,false),
-                        new Consumer("cluster","cluster.>", amqpSalMessageHandler,true,false)
+                        new Consumer("cluster","cluster.>", amqpSalMessageHandler,true,false),
+                        new Consumer("edge","edge.>", amqpSalMessageHandler,true,false)
                 ],
                 false,
                 false,

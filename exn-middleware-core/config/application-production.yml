@@ -14,14 +14,16 @@ application:
     config:
       url: '${ACTIVEMQ_HOST:nebulous-activemq}'
       port: '${ACTIVEMQ_PORT:5672}'
-      username: 'admin'
-      password: 'admin'
+      username: '${ACTIVEMQ_USER:admin}'
+      password: '${ACTIVEMQ_PASSWORD:admin}'
+      connectTimeout: 20 #min
+      readTimeout: 20 #min
   sal:
     protocol: 'http'
     host: '${SAL_HOST:nebulous-sal}'
     port: '${SAL_PORT:8080}'
     api: 'sal'
-    username: 'admin'
-    password: 'admin'
+    username: '${SAL_USER}'
+    password: '${SAL_PASSWORD}'
   jms:
     topic: 'eu.nebulouscloud'

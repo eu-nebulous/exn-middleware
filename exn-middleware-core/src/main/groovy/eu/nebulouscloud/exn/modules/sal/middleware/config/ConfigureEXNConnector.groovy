@@ -5,19 +5,18 @@ import eu.nebulouscloud.exn.modules.sal.middleware.handlers.connection.EXNConnec
 import eu.nebulouscloud.exn.Connector
 import eu.nebulouscloud.exn.core.Consumer
 import eu.nebulouscloud.exn.core.Publisher
-import eu.nebulouscloud.exn.modules.sal.configuration.AppConfig
+import eu.nebulouscloud.exn.modules.sal.configuration.ExnConfig
 import eu.nebulouscloud.exn.modules.sal.middleware.handlers.consumer.AMQPSalMessageHandler
 import eu.nebulouscloud.exn.settings.StaticExnConfig
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConfigurationProperties(prefix='application.exn')
 class ConfigureEXNConnector {
 
-    AppConfig config
+    @Autowired
+    ExnConfig config
 
     @Autowired
     AMQPSalMessageHandler amqpSalMessageHandler

@@ -52,10 +52,10 @@ public class AMQPSalMessageHandler extends Handler {
 
             log.info('REPLYING {}',response)
             Map amqpProperties =
-                    ['correlation-id': message.correlationId()?.toString(),
-                     'reply-to'      : message.replyTo()]
+                    ['correlation-id': message.correlationId()?.toString()]
 
             if (message.replyTo()) {
+                amqpProperties['reply-to'] = message.replyTo()
 
                 log.debug("Reply to Queue={} -> Correlation ID = {} ", message.replyTo(), message.correlationId())
                 String tempKey = message.replyTo() + message.correlationId()
@@ -63,7 +63,6 @@ public class AMQPSalMessageHandler extends Handler {
 
                 tempPublisher.send(response, message.subject(), amqpProperties)
                 context.unregisterPublisher(tempKey)
-
                 return
 
             }
@@ -73,8 +72,10 @@ public class AMQPSalMessageHandler extends Handler {
 
 //        Publisher publisher = context.getPublisher(StringUtils.substringAfter(destination,context.base+'.')) as StringPublisher
             Publisher publisher = context.getPublisher(StringUtils.substringAfter(destination, context.base + '.'))
+            if(publisher !=null && StringUtils.isNotEmpty(message.subject()) ){
+                publisher.send(response, message.subject(), amqpProperties)
 
-            publisher.send(response, message.subject(), amqpProperties)
+            }
         } catch (Exception e) {
             log.error('Pre Sent caught exception', e)
         }

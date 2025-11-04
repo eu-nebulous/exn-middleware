@@ -45,7 +45,7 @@ class EdgeProcessor extends AbstractProcessor{
         headers.add('sessionid',sessionId)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        Integer response = edgeRepository.save(o,headers,Integer.class)
+        String response = edgeRepository.save("register",  o,headers,String.class)
 
         return [
                 "status": HttpStatus.OK.value(),

@@ -2,6 +2,7 @@ package eu.nebulouscloud.exn.modules.sal.processors
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import eu.nebulouscloud.exn.modules.sal.service.ActionResolveService
+import groovy.json.JsonBuilder
 import org.apache.commons.lang3.StringUtils
 import org.apache.qpid.protonj2.client.impl.ClientMessage
 import org.slf4j.Logger
@@ -35,7 +36,14 @@ abstract class AbstractProcessor implements Processor {
         if(!metaData){
             metaData =[:]
         }
-        String o = payload.body
+
+        String o = ''
+        if (Map.isInstance(payload.body)){
+            def json = new JsonBuilder(payload.body)
+            o = json.toString()
+        }else{
+            o = payload.body
+        }
 
         Map ret = [:]
 

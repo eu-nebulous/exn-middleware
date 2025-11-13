@@ -1,5 +1,5 @@
 #Builder stage for maven
-FROM docker.io/library/openjdk:11 AS builder
+FROM docker.io/library/eclipse-temurin:11-jdk-jammy AS builder
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
@@ -21,7 +21,7 @@ COPY src ./src
 RUN mvn clean package
 
 #Main stage
-FROM docker.io/library/openjdk:11-jre-slim
+FROM docker.io/library/eclipse-temurin:11-jre-jammy
 
 #Set the working directory
 WORKDIR /app

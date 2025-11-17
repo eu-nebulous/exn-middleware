@@ -1,10 +1,10 @@
 package eu.nebulouscloud.exn.modules.sal.middleware.handlers.consumer
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import eu.nebulouscloud.exn.modules.sal.processors.Processor
 import eu.nebulouscloud.exn.core.Context
 import eu.nebulouscloud.exn.core.Handler
 import eu.nebulouscloud.exn.core.Publisher
+import eu.nebulouscloud.exn.modules.sal.processors.Processor
 import groovy.util.logging.Slf4j
 import org.apache.commons.lang3.StringUtils
 import org.apache.qpid.protonj2.client.Message
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @Slf4j
-public class AMQPSalMessageHandler extends Handler {
+public class ProactiveMessageHandler extends Handler {
 
     @Autowired
     Map<String, Processor> processors
@@ -39,11 +39,11 @@ public class AMQPSalMessageHandler extends Handler {
                 return
             }
 
-            def processor = destination.replaceAll(context.base + ".sal.", "")
+            def processor = destination.replaceAll(context.base + ".proactive.", "")
 
             //Remove component from destination
             processor = StringUtils.substringBefore(processor, '.')
-            processor = processor + "Processor"
+            processor = "proactive"+ StringUtils.capitalize(processor) + "Processor"
 
             def p = processors.containsKey(processor) ?
                     processors.get(processor) : processors.get('noOpProcessor')

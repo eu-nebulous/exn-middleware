@@ -25,5 +25,14 @@ application:
     api: 'sal'
     username: '${SAL_USER}'
     password: '${SAL_PASSWORD}'
+  proactive:
+    protocol: 'http'
+    host: '${PROACTIVE_HOST:nebulous-proactive}'
+    port: '${PROACTIVE_PORT:8880}'
+    api: 'rest'
+    username: '${PROACTIVE_USER}'
+    password: '${PROACTIVE_PASSWORD}'
+
+
   jms:
     topic: 'eu.nebulouscloud'

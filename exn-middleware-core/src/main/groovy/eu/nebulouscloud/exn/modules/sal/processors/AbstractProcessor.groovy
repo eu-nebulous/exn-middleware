@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.HttpServerErrorException
 
+import java.lang.reflect.Method
+
 /**
  * If no license is here then you can whatever you like!
  * and of course I am not liable
@@ -52,7 +54,6 @@ abstract class AbstractProcessor implements Processor {
 
         method = resolveService.resolve(method,metaData)
         try {
-
             switch (method) {
                 case 'get':
                     ret = get(metaData, o)
@@ -70,6 +71,13 @@ abstract class AbstractProcessor implements Processor {
                     ret = create(metaData,o)
                     break
                 default:
+
+                    //discover from available methos
+                    if (this.metaClass.respondsTo(this, method, metaData,o)) {
+                        ret = this."$method"(metaData,o)
+                        break
+                    }
+
                     ret.status = HttpStatus.NOT_ACCEPTABLE.value()
                     ret.body = ["key": "gateway-server-exception-error", "message": 'Action '+method+' not supported']
             }

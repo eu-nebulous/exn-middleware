@@ -2,6 +2,6 @@ __pycache__/
 .nox/
 
 **/.gradle
-**/config/appplication.yml
+**/config/application.yml
 **/build
 .java-version

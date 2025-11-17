@@ -32,7 +32,6 @@ abstract class AbstractSalRepository{
     protected String post(String url, Map body, HttpHeaders headers) throws HttpStatusCodeException{
 
         HttpEntity entity = new HttpEntity(body, headers)
-
         return restTemplate.postForEntity(baseUrl+'/'+resource+(url?'/'+url:''), entity, String.class).getBody()
 
     }
